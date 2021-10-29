@@ -1,70 +1,120 @@
 var quiz = document.getElementById('quiz');
 var results = document.getElementById('results');
 var submitBtn = document.getElementById('submit-btn');
-
-const quizQuestions = [
+var timerBtn = document.getElementById('timerCount');
+var card = document.getElementById('question-card');
+var questionTitle = document.getElementById('question-card--title');
+var questions = document.getElementById('question-card---questions');
+var score = 0;
+var count = 0;
+var quizQuestions = [
     {
         question: "Commonly used data types DO NOT include:",
-        answers: {
-            1: "strings",
-            2: "booleans",
-            3: "alerts",
-            4: "numbers"
-        },
+        answers: [
+             "strings",
+             "booleans",
+             "alerts",
+             "numbers"
+        ],
         correctAnswer: "3"
     },
     {
         question: "The condition in an if / else statement is enclosed within _______.",
-        answers: {
-            1: "quotes",
-            2: "curly brackets",
-            3: "parentheses",
-            4: "square brackets"
-        },
+        answers: [
+             "quotes",
+             "curly brackets",
+             "parentheses",
+             "square brackets"
+        ],
         correctAnswer: "2"
     },
     {
         question: "Arrays in JavaScript can be used to store _______.",
-        answers: {
-            1: "numbers and strings",
-            2: "other arrays",
-            3: "booleans",
-            4: "all of the above"
-        },
+        answers: [
+             "numbers and strings",
+             "other arrays",
+             "booleans",
+             "all of the above"
+        ],
         correctAnswer: "4"
     },
     {
         question: "String values must be enclosed within _______ when being assigned to variables.",
-        answers: {
-            1: "commas",
-            2: "curly brackets",
-            3: "quotes",
-            4: "parentheses"
-        },
+        answers: [
+             "commas",
+             "curly brackets",
+             "quotes",
+             "parentheses"
+        ],
         correctAnswer: "3"
     },
     {
         question: "A very useful tool used during development and debugging for printing content to the debugger is:",
-        answers: {
-            1: "JavaScript",
-            2: "terminal / bash",
-            3: "for loops",
-            4: "console.log"
-        },
+        answers: [
+             "JavaScript",
+             "terminal / bash",
+             "for loops",
+             "console.log"
+        ],
         correctAnswer: "4"
     }
-]
+]; 
 
-function createQuiz() {
+// quiz
+function createButtons(array) {
+    for (var i = 0; i < array.length; i++) {
+        var button = document.createElement("button");
+        button.textContent = quizQuestions[count].answers[i]
+        button.onclick = function() {
+            // clear buttons
+            // Element.remove()
+            // check answer
+            // if correct then move on to next question without penalty
+            // else subtract 10 seconds from timer and then move on to next question
+            // increment count
+            // if count is greater than length of quizQuestions array then end quiz
+            if (count > quizQuestions.length) {
+                // call endQuiz function
+            }
+            count++;
+            console.log(count)
+            nextQuestion()
+        }
+        questions.appendChild(button)
+    }
+}
+
+function nextQuestion () {
+    card.style.display = "block";
+    questionTitle.textContent = quizQuestions[count].question;
+    createButtons(quizQuestions[count].answers)
 
 }
 
+function endQuiz() {
+    card.style.display = "none";
+}
+
+// results function
 function showResults () {
+    console.log("let's see the results!");
+    quiz.style.display = "none";
+    nextQuestion()
 
 }
 
-// show quiz when it starts
-createQuiz();
+// timer function
+function timer () {
+    var timerCount = 100;
+    var timerInterval = setInterval(function() {
+        document.getElementById('timerCount').innerHTML=count;
+        count--;
+        if (count === 0) {
+            clearInterval(interval);
+            alert("You're out of time!");
+        }
+    }, 1000);
+}
 
 // show results when you click on submit
-submitBtn.addEventListener('click', showResults);
+timerBtn.addEventListener('click', showResults);

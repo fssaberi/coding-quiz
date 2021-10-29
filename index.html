@@ -8,15 +8,34 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 <body>
-    <div class="quiz" id="quiz">
-        <header>
-            <h1>Coding Quiz</h1>
-        </header>
-        <p>Try to answer the code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
-        <button>Start Quiz</button>
+    <div class="container">
+        <div class="quiz" id="quiz">
+            <header>
+                <h1>Coding Quiz</h1>
+            </header>
+            <p>Try to answer the code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+            <button id="timerCount">Start Quiz</button>
+        </div>
+        <div class="quiz" id="question-card">
+            <h1 id="question-card--title"></h1>
+            <ul id="question-card---questions">
+
+            </ul>
+        </div>
+        <div class="quiz" id="results">
+            <h1 id="question-card--title"></h1>
+            <ul id="question-card---questions">
+
+            </ul>
+        </div>
+        <!-- <button class="submit-button" id="submit-btn">Submit</button> -->
+        <div id="results"></div>
+        <div>
+            <h3>View High Scores</h3>
+        </div>
+        <div id="timerCount">Timer</div>
     </div>
-    <button class="submit-button" id="submit-btn">Submit</button>
-    <div id="results"></div>
-    <script src="assets/js/script.js"></script>
+    
+    <script src="./assets/js/script.js"></script>
 </body>
 </html>
