@@ -66,18 +66,26 @@ function createButtons(array) {
         var button = document.createElement("button");
         button.textContent = quizQuestions[count].answers[i]
         button.onclick = function() {
+            var currentQuestion = quizQuestions[currentQuestionIndex];
+            var currentQuestionIndex = 0;
+            var finalQuestionIndex = quizQuestions.length;
             // clear buttons
-            // Element.remove()
-            // check answer
+            button.remove();
             // if correct then move on to next question without penalty
+            if (currentQuestionIndex === finalQuestionIndex) {
+                nextQuestion()
+            } 
             // else subtract 10 seconds from timer and then move on to next question
-            // increment count
+            else {
+                count--;
+            }
             // if count is greater than length of quizQuestions array then end quiz
             if (count > quizQuestions.length) {
-                // call endQuiz function
+                endQuiz()
             }
+            // increment count
             count++;
-            console.log(count)
+            console.log(count);
             nextQuestion()
         }
         questions.appendChild(button)
