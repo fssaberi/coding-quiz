@@ -1,7 +1,8 @@
 var quiz = document.getElementById('quiz');
 var results = document.getElementById('results');
+var startBtn = document.getElementById('start')
 var submitBtn = document.getElementById('submit-btn');
-var timerBtn = document.getElementById('timerCount');
+var startBtn = document.getElementById('start');
 var card = document.getElementById('question-card');
 var questionTitle = document.getElementById('questionCardTitle');
 var questions = document.getElementById('question-card---questions');
@@ -318,10 +319,11 @@ function timer() {
     }, 1000);
 }
 
-// function startQuiz() {
-//     question1();
-// }
+function startQuiz() {
+    quiz.style.display = "none";
+    question1();
+}
 
-timerBtn.addEventListener('click', timer);
-timerBtn.addEventListener('click', question1);
+startBtn.addEventListener('click', timer);
+startBtn.addEventListener('click', startQuiz);
 
