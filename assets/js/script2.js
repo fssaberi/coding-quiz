@@ -263,12 +263,6 @@ function question5() {
     question5Answer4.addEventListener('click', showResults);
 }
 
-// function endQuiz() {
-//     card.style.display = "none";
-//     stopTimer();
-//     showResults();
-// }
-
 // results function
 function showResults() {
     card.style.display = "none";
@@ -285,6 +279,9 @@ function highScores() {
     highScore.style.display = "block";
     viewHS.style.display = "none";
     timerDiv.style.display = "none";
+
+    localStorage.setItem("score", timerCount);
+    document.getElementById("initials").innerHTML = localStorage.getItem("score")
     
 }
 
@@ -305,6 +302,16 @@ function startQuiz() {
     quiz.style.display = "none";
     question1();
 }
+
+// store score
+if (typeof(Storage) !== "undefined") {
+    // Store
+    localStorage.setItem("score", timerCount);
+    // Retrieve
+    document.getElementById("initials").innerHTML = localStorage.getItem("score");
+  } else {
+    document.getElementById("score").innerHTML = "Sorry, your browser does not support Web Storage...";
+  }
 
 startBtn.addEventListener('click', timer);
 startBtn.addEventListener('click', startQuiz);
