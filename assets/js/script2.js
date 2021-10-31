@@ -90,7 +90,6 @@ var quizQuestions = {
 function question1() {
     questions.innerHTML = ""
     card.style.display = "block";
-    console.log(quizQuestions.question1)
     questionTitle.innerHTML = quizQuestions.question1
     var question1Answer1 = document.createElement("button")
     var question1Answer2 = document.createElement("button")
@@ -107,7 +106,7 @@ function question1() {
     questions.appendChild(question1Answer4)
 
     var button = document.createElement("button");
-    button.textContent = quizQuestions.answers1
+    button.textContent = quizQuestions.answers1;
     button.onclick = function() {
         // clear buttons
         button.remove();
@@ -119,9 +118,13 @@ function question1() {
         if (quizQuestions.answers1 !== question1Answer3) {
             timerCount--;
         }
-    }
+        return
+    };
 
-    console.log(quizQuestions.question1)
+    question1Answer1.addEventListener('click', question2);
+    question1Answer2.addEventListener('click', question2);
+    question1Answer3.addEventListener('click', question2);
+    question1Answer4.addEventListener('click', question2);
 }
 
 function question2() {
@@ -143,7 +146,26 @@ function question2() {
     questions.appendChild(question2Answer3)
     questions.appendChild(question2Answer4)
 
-    console.log(quizQuestions.question2)
+    var button = document.createElement("button");
+    button.textContent = quizQuestions.answers2;
+    button.onclick = function() {
+        // clear buttons
+        button.remove();
+        // if correct then move on to next question without penalty
+        if (quizQuestions.answers2 == question2Answer2) {
+                timerCount++;
+            } 
+        // else subtract 10 seconds from timer and then move on to next question
+        if (quizQuestions.answers2 !== question2Answer2) {
+            timerCount--;
+        }
+        return
+    };
+
+    question2Answer1.addEventListener('click', question3);
+    question2Answer2.addEventListener('click', question3);
+    question2Answer3.addEventListener('click', question3);
+    question2Answer4.addEventListener('click', question3);
 }
 
 function question3() {
@@ -165,7 +187,26 @@ function question3() {
     questions.appendChild(question3Answer3)
     questions.appendChild(question3Answer4)
 
-    console.log(quizQuestions.question3)
+    var button = document.createElement("button");
+    button.textContent = quizQuestions.answers3;
+    button.onclick = function() {
+        // clear buttons
+        button.remove();
+        // if correct then move on to next question without penalty
+        if (quizQuestions.answers3 == question3Answer4) {
+                timerCount++;
+            } 
+        // else subtract 10 seconds from timer and then move on to next question
+        if (quizQuestions.answers3 !== question3Answer4) {
+            timerCount--;
+        }
+        return
+    };
+
+    question3Answer1.addEventListener('click', question4);
+    question3Answer2.addEventListener('click', question4);
+    question3Answer3.addEventListener('click', question4);
+    question3Answer4.addEventListener('click', question4);
 }
 
 function question4() {
@@ -187,7 +228,26 @@ function question4() {
     questions.appendChild(question4Answer3)
     questions.appendChild(question4Answer4)
 
-    console.log(quizQuestions.question4)
+    var button = document.createElement("button");
+    button.textContent = quizQuestions.answers4;
+    button.onclick = function() {
+        // clear buttons
+        button.remove();
+        // if correct then move on to next question without penalty
+        if (quizQuestions.answers4 == question4Answer3) {
+                timerCount++;
+            } 
+        // else subtract 10 seconds from timer and then move on to next question
+        if (quizQuestions.answers4 !== question4Answer3) {
+            timerCount--;
+        }
+        return
+    };
+
+    question4Answer1.addEventListener('click', question5);
+    question4Answer2.addEventListener('click', question5);
+    question4Answer3.addEventListener('click', question5);
+    question4Answer4.addEventListener('click', question5);
    
 }
 
@@ -210,18 +270,38 @@ function question5() {
     questions.appendChild(question5Answer3)
     questions.appendChild(question5Answer4)
 
-    console.log(quizQuestions.question5)
+    var button = document.createElement("button");
+    button.textContent = quizQuestions.answers5;
+    button.onclick = function() {
+        // clear buttons
+        button.remove();
+        // if correct then move on to next question without penalty
+        if (quizQuestions.answers5 == question5Answer4) {
+                timerCount++;
+            } 
+        // else subtract 10 seconds from timer and then move on to next question
+        if (quizQuestions.answers5 !== question5Answer4) {
+            timerCount--;
+        }
+        return
+    };
+
+    question5Answer1.addEventListener('click', showResults);
+    question5Answer2.addEventListener('click', showResults);
+    question5Answer3.addEventListener('click', showResults);
+    question5Answer4.addEventListener('click', showResults);
 }
 
-function endQuiz() {
-    card.style.display = "none";
-}
+// function endQuiz() {
+//     card.style.display = "none";
+//     submitBtn.addEventListener('click', showResults)
+// }
 
 // results function
 function showResults() {
     console.log("let's see the results!");
     quiz.style.display = "none";
-    startQuiz()
+
 
 }
 
@@ -238,9 +318,10 @@ function timer() {
     }, 1000);
 }
 
-function startQuiz(event) {
-    timer();
-    question1();
-}
+// function startQuiz() {
+//     question1();
+// }
 
-timerBtn.addEventListener('click', showResults);
+timerBtn.addEventListener('click', timer);
+timerBtn.addEventListener('click', question1);
+
