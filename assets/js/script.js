@@ -16,7 +16,7 @@ var quizQuestions = [
              "alerts",
              "numbers"
         ],
-        correctAnswer: "3"
+        correctAnswer: "2"
     },
     {
         question: "The condition in an if / else statement is enclosed within _______.",
@@ -26,7 +26,7 @@ var quizQuestions = [
              "parentheses",
              "square brackets"
         ],
-        correctAnswer: "2"
+        correctAnswer: "1"
     },
     {
         question: "Arrays in JavaScript can be used to store _______.",
@@ -36,7 +36,7 @@ var quizQuestions = [
              "booleans",
              "all of the above"
         ],
-        correctAnswer: "4"
+        correctAnswer: "3"
     },
     {
         question: "String values must be enclosed within _______ when being assigned to variables.",
@@ -46,7 +46,7 @@ var quizQuestions = [
              "quotes",
              "parentheses"
         ],
-        correctAnswer: "3"
+        correctAnswer: "2"
     },
     {
         question: "A very useful tool used during development and debugging for printing content to the debugger is:",
@@ -56,7 +56,7 @@ var quizQuestions = [
              "for loops",
              "console.log"
         ],
-        correctAnswer: "4"
+        correctAnswer: "3"
     }
 ]; 
 
@@ -66,25 +66,26 @@ function createButtons(array) {
         var button = document.createElement("button");
         button.textContent = quizQuestions[count].answers[i]
         button.onclick = function() {
-            var currentQuestion = quizQuestions[currentQuestionIndex];
+            /*var currentQuestion = quizQuestions[currentQuestionIndex];
             var currentQuestionIndex = 0;
-            var finalQuestionIndex = quizQuestions.length;
+            var finalQuestionIndex = quizQuestions.length;*/
             // clear buttons
             button.remove();
             // if correct then move on to next question without penalty
-            if (currentQuestionIndex === finalQuestionIndex) {
-                nextQuestion()
-            } 
+            for (var j = 0; j < quizQuestions.answers.length; j++) {
+                if (quizQuestions[i].correctAnswer == quizQuestions[i].answers[j]) {
+                    timerCount++;
+                } 
+            }
+            
             // else subtract 10 seconds from timer and then move on to next question
-            else {
-                count--;
+            if (quizQuestions) {
+                timerCount--;
             }
             // if count is greater than length of quizQuestions array then end quiz
             if (count > quizQuestions.length) {
                 endQuiz()
             }
-            // increment count
-            count++;
             console.log(count);
             nextQuestion()
         }
@@ -94,7 +95,7 @@ function createButtons(array) {
 
 function nextQuestion () {
     card.style.display = "block";
-    questionTitle.textContent = quizQuestions[count].question;
+    questionTitle.innerHTML = quizQuestions[count].question;
     createButtons(quizQuestions[count].answers)
 
 }
@@ -115,14 +116,17 @@ function showResults () {
 function timer () {
     var timerCount = 100;
     var timerInterval = setInterval(function() {
-        document.getElementById('timerCount').innerHTML=count;
-        count--;
-        if (count === 0) {
+        document.getElementById('timerCount').innerHTML=timerCount;
+        timerCount--;
+        if (timerCount === 0) {
             clearInterval(interval);
             alert("You're out of time!");
         }
     }, 1000);
 }
 
+nextQuestion();
+
 // show results when you click on submit
-timerBtn.addEventListener('click', showResults);
+timerBtn.addEventListener('click', timer);
+
