@@ -1,12 +1,23 @@
 body {
     display: flex;
     justify-content: center;
+    margin: 50px 200px 50px 200px;
+    padding: 10px;
+    border: 10px solid purple;
 }
 
 #question-card {
     display: none;
 }
 
-#timerCount {
+#timerDiv {
     display: block;
+}
+
+#resultsCard {
+    display: none;
+}
+
+#highScoreCard {
+    display: none;
 }

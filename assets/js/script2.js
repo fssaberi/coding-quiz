@@ -1,13 +1,16 @@
 var quiz = document.getElementById('quiz');
-var results = document.getElementById('results');
+var results = document.getElementById('resultsCard');
 var startBtn = document.getElementById('start')
 var submitBtn = document.getElementById('submit-btn');
 var startBtn = document.getElementById('start');
 var card = document.getElementById('question-card');
 var questionTitle = document.getElementById('questionCardTitle');
 var questions = document.getElementById('question-card---questions');
-var score = 0;
-var count = 0;
+var highScore = document.getElementById('highScoreCard');
+var viewHS = document.getElementById('viewHS');
+var timerDiv = document.getElementById('timerDiv');
+var timerCount = 75;
+
 var quizQuestions = {
         question1: "Commonly used data types DO NOT include:",
         answers1: [
@@ -55,39 +58,6 @@ var quizQuestions = {
         correctAnswer5: "3"
 }; 
 
-// // quiz
-// function createButtons(array) {
-//     for (var i = 0; i < array.length; i++) {
-//         var button = document.createElement("button");
-//         button.textContent = quizQuestions[count].answers[i]
-//         button.onclick = function() {
-//             /*var currentQuestion = quizQuestions[currentQuestionIndex];
-//             var currentQuestionIndex = 0;
-//             var finalQuestionIndex = quizQuestions.length;*/
-//             // clear buttons
-//             button.remove();
-//             // if correct then move on to next question without penalty
-//             for (var j = 0; j < quizQuestions.answers.length; j++) {
-//                 if (quizQuestions[i].correctAnswer == quizQuestions[i].answers[j]) {
-//                     timerCount++;
-//                 } 
-            
-            
-//             // else subtract 10 seconds from timer and then move on to next question
-//             if (quizQuestions) {
-//                 timerCount--;
-//             }
-//             // if count is greater than length of quizQuestions array then end quiz
-//             if (count > quizQuestions.length) {
-//                 endQuiz()
-//             }
-//             console.log(count);
-//             nextQuestion()
-//         }
-//         questions.appendChild(button)
-//     }
-// }
-
 function question1() {
     questions.innerHTML = ""
     card.style.display = "block";
@@ -119,9 +89,9 @@ function question1() {
         if (quizQuestions.answers1 !== question1Answer3) {
             timerCount--;
         }
-        return
     };
 
+    button.onclick();
     question1Answer1.addEventListener('click', question2);
     question1Answer2.addEventListener('click', question2);
     question1Answer3.addEventListener('click', question2);
@@ -131,7 +101,6 @@ function question1() {
 function question2() {
     questions.innerHTML = ""
     card.style.display = "block";
-    console.log(quizQuestions.question2)
     questionTitle.innerHTML = quizQuestions.question2
     var question2Answer1 = document.createElement("button")
     var question2Answer2 = document.createElement("button")
@@ -163,6 +132,7 @@ function question2() {
         return
     };
 
+    button.onclick();
     question2Answer1.addEventListener('click', question3);
     question2Answer2.addEventListener('click', question3);
     question2Answer3.addEventListener('click', question3);
@@ -172,7 +142,6 @@ function question2() {
 function question3() {
     questions.innerHTML = ""
     card.style.display = "block";
-    console.log(quizQuestions.question3)
     questionTitle.innerHTML = quizQuestions.question3
     var question3Answer1 = document.createElement("button")
     var question3Answer2 = document.createElement("button")
@@ -204,6 +173,7 @@ function question3() {
         return
     };
 
+    button.onclick();
     question3Answer1.addEventListener('click', question4);
     question3Answer2.addEventListener('click', question4);
     question3Answer3.addEventListener('click', question4);
@@ -213,7 +183,6 @@ function question3() {
 function question4() {
     questions.innerHTML = ""
     card.style.display = "block";
-    console.log(quizQuestions.question4)
     questionTitle.innerHTML = quizQuestions.question4
     var question4Answer1 = document.createElement("button")
     var question4Answer2 = document.createElement("button")
@@ -245,6 +214,7 @@ function question4() {
         return
     };
 
+    button.onclick();
     question4Answer1.addEventListener('click', question5);
     question4Answer2.addEventListener('click', question5);
     question4Answer3.addEventListener('click', question5);
@@ -255,7 +225,6 @@ function question4() {
 function question5() {
     questions.innerHTML = ""
     card.style.display = "block";
-    console.log(quizQuestions.question5)
     questionTitle.innerHTML = quizQuestions.question5
     var question5Answer1 = document.createElement("button")
     var question5Answer2 = document.createElement("button")
@@ -287,6 +256,7 @@ function question5() {
         return
     };
 
+    button.onclick();
     question5Answer1.addEventListener('click', showResults);
     question5Answer2.addEventListener('click', showResults);
     question5Answer3.addEventListener('click', showResults);
@@ -295,28 +265,40 @@ function question5() {
 
 // function endQuiz() {
 //     card.style.display = "none";
-//     submitBtn.addEventListener('click', showResults)
+//     stopTimer();
+//     showResults();
 // }
 
 // results function
 function showResults() {
-    console.log("let's see the results!");
-    quiz.style.display = "none";
-
-
+    card.style.display = "none";
+    results.style.display = "block";
+    viewHS.style.display = "none";
+    console.log("You're done!");
+    
+    submitBtn.addEventListener('click', highScores)
 }
 
-// timer function
+// high scores function
+function highScores() {
+    results.style.display = "none";
+    highScore.style.display = "block";
+    viewHS.style.display = "none";
+    timerDiv.style.display = "none";
+    
+}
+
+// timer function    
 function timer() {
-    var timerCount = 100;
     var timerInterval = setInterval(function() {
         document.getElementById('timerCount').innerHTML=timerCount;
         timerCount--;
-        if (timerCount === 0) {
-            clearInterval(interval);
-            alert("You're out of time!");
-        }
     }, 1000);
+    if (timerCount === 0) {
+        clearInterval(timerInterval);
+        alert("You're out of time!");
+    }
+    return 
 }
 
 function startQuiz() {

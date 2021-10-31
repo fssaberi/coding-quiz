@@ -14,7 +14,7 @@
                 <h1>Coding Quiz</h1>
             </header>
             <p>Try to answer the code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
-            <button id="start">Start Quiz</button>
+            <button id="start" class="buttons">Start Quiz</button>
         </div>
         <div class="quiz" id="question-card">
             <h1 id="questionCardTitle"></h1>
@@ -28,12 +28,24 @@
 
             </ul>
         </div>
-        <!-- <button class="submit-button" id="submit-btn">Submit</button> -->
-        <div id="results"></div>
-        <div>
+        <div id="viewHS">
             <h3>View High Scores</h3>
         </div>
-        <div id="timerCount">Timer</div>
+        <div id="timerDiv">
+            <h3>Timer</h3>
+            <p id="timerCount"></p>
+        </div>
+        <div id="resultsCard">
+            <h2>All done!</h2>
+            <label for="initials">Enter initials:</label>
+            <input type="text" placeholder="Your initials" id="initials" class="initials"/>
+            <button type="submit" class="buttons" id="submit-btn">Submit</button>
+        </div>
+        <div id="highScoreCard">
+            <h2>High Scores</h2>
+            <button class="buttons">Go Back</button>
+            <button class="buttons">Clear High Scores</button>
+        </div>
     </div>
     
     <script src="./assets/js/script2.js"></script>
