@@ -13,6 +13,6 @@ The user is taken to a code quiz, and clicks on the start button. When they clic
 
 The following image shows a screenshot of the application: ![ApplicationScreenshot](./assets/images/coding-quiz-screenshot.png)
 
-You can access the GitHub repository here:
+You can access the GitHub repository here: https://github.com/fssaberi/coding-quiz.git. 
 
-You can access the webpage here: 
+You can access the webpage here: https://fssaberi.github.io/coding-quiz/.
