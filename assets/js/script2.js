@@ -10,6 +10,7 @@ var highScore = document.getElementById('highScoreCard');
 var viewHS = document.getElementById('viewHS');
 var timerDiv = document.getElementById('timerDiv');
 var timerCount = 75;
+var initials;
 
 var quizQuestions = {
         question1: "Commonly used data types DO NOT include:",
@@ -19,7 +20,7 @@ var quizQuestions = {
              "alerts",
              "numbers"
         ],
-        correctAnswer1: "2",
+        correctAnswer1: "alerts",
     
         question2: "The condition in an if / else statement is enclosed within _______.",
         answers2: [
@@ -28,7 +29,7 @@ var quizQuestions = {
              "parentheses",
              "square brackets"
         ],
-        correctAnswer2: "1",
+        correctAnswer2: "curly brackets",
     
         question3: "Arrays in JavaScript can be used to store _______.",
         answers3: [
@@ -37,7 +38,7 @@ var quizQuestions = {
              "booleans",
              "all of the above"
         ],
-        correctAnswer3: "3",
+        correctAnswer3: "all of the above",
     
         question4: "String values must be enclosed within _______ when being assigned to variables.",
         answers4: [
@@ -46,7 +47,7 @@ var quizQuestions = {
              "quotes",
              "parentheses"
         ],
-        correctAnswer4: "2",
+        correctAnswer4: "quotes",
 
         question5: "A very useful tool used during development and debugging for printing content to the debugger is:",
         answers5: [
@@ -55,8 +56,29 @@ var quizQuestions = {
              "for loops",
              "console.log"
         ],
-        correctAnswer5: "3"
+        correctAnswer5: "console.log"
 }; 
+
+var timerInterval;
+var count = 1
+
+function checkAnswer1() {
+    // if correct then move on to next question without penalty
+    console.log(this.innerText)
+    console.log(this)
+    if (quizQuestions.correctAnswer1 == this.innerText) { 
+        console.log(quizQuestions.correctAnswer1)
+
+        } 
+    // else subtract 10 seconds from timer and then move on to next question
+    if (quizQuestions.correctAnswer1 !== this.innerText) {
+        timerCount-=15;
+    }
+    // clear buttons
+   
+}
+
+
 
 function question1() {
     questions.innerHTML = ""
@@ -71,6 +93,11 @@ function question1() {
     question1Answer3.innerHTML = quizQuestions.answers1[2]
     question1Answer4.innerHTML = quizQuestions.answers1[3]
 
+    question1Answer1.onclick = checkAnswer1
+    question1Answer2.onclick = checkAnswer1
+    question1Answer3.onclick = checkAnswer1
+    question1Answer4.onclick = checkAnswer1
+
     questions.appendChild(question1Answer1)
     questions.appendChild(question1Answer2)
     questions.appendChild(question1Answer3)
@@ -79,16 +106,18 @@ function question1() {
     var button = document.createElement("button");
     button.textContent = quizQuestions.answers1;
     button.onclick = function() {
-        // clear buttons
-        button.remove();
         // if correct then move on to next question without penalty
         if (quizQuestions.answers1 == question1Answer3) {
-                timerCount++;
+            console.log(question1Answer3)
+            console.log(quizQuestions.answers1)    
+            timerCount++;
             } 
         // else subtract 10 seconds from timer and then move on to next question
         if (quizQuestions.answers1 !== question1Answer3) {
             timerCount--;
         }
+        // clear buttons
+        button.remove();
     };
 
     button.onclick();
@@ -240,27 +269,26 @@ function question5() {
     questions.appendChild(question5Answer3)
     questions.appendChild(question5Answer4)
 
-    var button = document.createElement("button");
-    button.textContent = quizQuestions.answers5;
-    button.onclick = function() {
-        // clear buttons
-        button.remove();
-        // if correct then move on to next question without penalty
-        if (quizQuestions.answers5 == question5Answer4) {
-                timerCount++;
-            } 
-        // else subtract 10 seconds from timer and then move on to next question
-        if (quizQuestions.answers5 !== question5Answer4) {
-            timerCount--;
-        }
-        return
-    };
-
-    button.onclick();
     question5Answer1.addEventListener('click', showResults);
     question5Answer2.addEventListener('click', showResults);
     question5Answer3.addEventListener('click', showResults);
     question5Answer4.addEventListener('click', showResults);
+}
+
+function checkAnswer5() {
+    // if correct then move on to next question without penalty
+    console.log(this.innerText)
+    console.log(this)
+    if (quizQuestions.correctAnswer5 == this.innerText) { 
+        console.log(quizQuestions.correctAnswer5)
+
+        } 
+    // else subtract 10 seconds from timer and then move on to next question
+    if (quizQuestions.correctAnswer5 !== this.innerText) {
+        timerCount-=15;
+    }
+    // clear buttons
+   
 }
 
 // results function
@@ -269,7 +297,8 @@ function showResults() {
     results.style.display = "block";
     viewHS.style.display = "none";
     console.log("You're done!");
-    
+    endQuiz();
+    console.log(timerCount)
     submitBtn.addEventListener('click', highScores)
 }
 
@@ -279,23 +308,30 @@ function highScores() {
     highScore.style.display = "block";
     viewHS.style.display = "none";
     timerDiv.style.display = "none";
-
-    localStorage.setItem("score", timerCount);
-    document.getElementById("initials").innerHTML = localStorage.getItem("score")
+    initials = document.getElementById("initials").textContent;
+    console.log(initials)
+   saveScores()
     
 }
 
 // timer function    
 function timer() {
-    var timerInterval = setInterval(function() {
+    timerInterval = setInterval(function() {
         document.getElementById('timerCount').innerHTML=timerCount;
         timerCount--;
+        // console.log(timerCount)
+        console.log(timerInterval)
+        if (timerCount === -1) {
+            clearInterval(timerInterval);
+            alert("You're out of time!");
+        }
     }, 1000);
-    if (timerCount === 0) {
-        clearInterval(timerInterval);
-        alert("You're out of time!");
-    }
+    
     return 
+}
+
+function endQuiz() {
+    clearInterval(timerInterval);
 }
 
 function startQuiz() {
@@ -303,15 +339,15 @@ function startQuiz() {
     question1();
 }
 
-// store score
-if (typeof(Storage) !== "undefined") {
-    // Store
-    localStorage.setItem("score", timerCount);
-    // Retrieve
-    document.getElementById("initials").innerHTML = localStorage.getItem("score");
-  } else {
-    document.getElementById("score").innerHTML = "Sorry, your browser does not support Web Storage...";
-  }
+function saveScores() {
+    var highscores = JSON.parse(localStorage.getItem("highscores")) || []
+    var userscore = {
+        initials: initials,
+        score: timerCount
+    }
+    highscores.push(userscore);
+    localStorage.setItem("highscores", JSON.stringify(highscores));
+}
 
 startBtn.addEventListener('click', timer);
 startBtn.addEventListener('click', startQuiz);
